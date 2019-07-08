@@ -33,7 +33,7 @@
   - ソースコードの色
   - UIのの色
   - TextMateテーマの移植
-  - カスタムファイルアイコン
+  - カスタムファイルアイコン -> [![Kuin contribution point](https://img.shields.io/badge/contribution%20point-kuin-pink.svg)](http://kuina.ch/kuin)
 - 宣言型言語機能
   - 括弧のマッチング
   - 自動インデント
@@ -45,7 +45,11 @@
   - IntelliSense
 - ワークベンチ拡張
   - ファイルエクスプローラに新規の右クリックアクションを追加
-  - カスタムエクスプローラ(`TreeView` API)
-  - カスタマイズUI(`Webview` API)
+  - Title Bar
+  - Activity Bar(View Container): `contributes.viewsContainers`
+  - Side Bar(Tree View): `contributes.views` -> [![Kuin contribution point](https://img.shields.io/badge/contribution%20point-kuin-pink.svg)](http://kuina.ch/kuin)
+  - Panel
+  - Editor Group(Webview)
+  - Status Bar(Status Bar Item): `StatusBarItem` テキスト・アイコンの表示，クリックコマンド実行 -> [![Kuin contribution point](https://img.shields.io/badge/contribution%20point-kuin-pink.svg)](http://kuina.ch/kuin)
 - デバッグ(`Debug Extension` API)
 - UIのDOMにアクセスすることはできない
