@@ -1,11 +1,34 @@
 # EXTENSIONS CAPABILITIES
 - 共通機能
-  - コマンド，構成，キーバインド，コンテキストメニューの登録
+  - コマンド
+    - コマンドパレットから実行，コマンドにキーバインド，右クリックからの呼び出し
+    - `vscode.commands` API: コマンドを登録
+    - `contributes.commands` Contribution Point: コマンドパレットから実行可能化
+  - 構成
+    - `contributes.configuration` Contribution Point: 拡張を構成
+    - `workspace.getConfiguration` API: 呼び出し
+  - キーバインド
+    - `contributes.keybindings`: 設定
+  - コンテキストメニュー
+    - `contributes.menus` Contribution Point: 右クリックメニューに項目を追加
   - ワークスペース・グローバルデータの保存
+    - `ExtensionContext.workspaceState`: ワークスペースのkey/valueを保存
+    - `ExtensionContext.globalState`: 拡張機能有効時のkey/valueを保存
+    - `ExtensionContext.storagePath`: ワークスペース固有のストレージパス
+    - `ExtensionContext.globalStoragePath`: 拡張機能有効時のストレージパス
   - 通知の表示
-  - Quick Pickを使用したユーザ入力の収集
-  - Open the system file picker to let users select files or folders.
-  - Use the Progress API to indicate long-running operations.
+    - `window.showInformationMessage`
+    - `window.showWarningMessage`
+    - `window.showErrorMessage`
+  - Quick Pickを使用したユーザ入力
+    - `vscode.QuickPick` API
+  - File Picker
+    - `vscode.window.showOpenDialog` API
+    - system file pickerを開く，ファイルとフォルダを選択
+  - Output Channel
+    - `window.createOutputChannel` API: ログに使用
+  - Progress API
+    - `vscode.Progress` API: プログレスバーの表示
 - テーマ
   - ソースコードの色
   - UIのの色
