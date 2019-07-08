@@ -1,0 +1,28 @@
+# EXTENSIONS CAPABILITIES
+- 共通機能
+  - コマンド，構成，キーバインド，コンテキストメニューの登録
+  - ワークスペース・グローバルデータの保存
+  - 通知の表示
+  - Quick Pickを使用したユーザ入力の収集
+  - Open the system file picker to let users select files or folders.
+  - Use the Progress API to indicate long-running operations.
+- テーマ
+  - ソースコードの色
+  - UIのの色
+  - TextMateテーマの移植
+  - カスタムファイルアイコン
+- 宣言型言語機能
+  - 括弧のマッチング
+  - 自動インデント
+  - 構文の強調表示
+- プログラミング言語機能(`vscode.languages.*` API)
+  - ホバー
+  - 定義へ移動
+  - 診断・エラー
+  - IntelliSense
+- ワークベンチ拡張
+  - ファイルエクスプローラに新規の右クリックアクションを追加
+  - カスタムエクスプローラ(`TreeView` API)
+  - カスタマイズUI(`Webview` API)
+- デバッグ(`Debug Extension` API)
+- UIのDOMにアクセスすることはできない
