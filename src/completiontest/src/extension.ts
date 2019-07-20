@@ -51,12 +51,21 @@ export function activate(context: vscode.ExtensionContext) {
 			// snippetCompletion.insertText = new vscode.SnippetString('Good ${1|morning,afternoon,evening|}. It is ${1}, right?');
 			// snippetCompletion.documentation = new vscode.MarkdownString("Inserts a snippet that lets you select the _appropriate_ part of the day for your greeting.");
 
+			// Kuin modules
+			const constantCompletion01 = new vscode.CompletionItem('except', vscode.CompletionItemKind.Module);
+			constantCompletion01.commitCharacters = ['@'];
+			constantCompletion01.detail = 'Kuin library';
+			constantCompletion01.documentation = new vscode.MarkdownString('Press `@` to get `except@`');
+			const constantCompletion02 = new vscode.CompletionItem('lib', vscode.CompletionItemKind.Module);
+			constantCompletion02.commitCharacters = ['@'];
+			constantCompletion02.detail = 'Kuin library';
+			constantCompletion02.documentation = new vscode.MarkdownString('Press `@` to get `lib@`');
+
 			// Kuin class
-			const classCompletion = new vscode.CompletionItem('kuin@Class');
+			const classCompletion = new vscode.CompletionItem('kuin@Class', vscode.CompletionItemKind.Class);
 			classCompletion.commitCharacters = ['.'];
 			classCompletion.detail = 'Kuin class';
 			classCompletion.documentation = new vscode.MarkdownString('Press `.` to get `kuin@Class.`');
-
 
 			// Kuin keywords
 			const keywordCompletion01 = new vscode.CompletionItem('alias', vscode.CompletionItemKind.Keyword);
@@ -262,6 +271,8 @@ export function activate(context: vscode.ExtensionContext) {
 			// return all completion items as array
 			return [
 				classCompletion,
+				constantCompletion01,
+				constantCompletion02,
 				keywordCompletion01,
 				keywordCompletion02,
 				keywordCompletion03,
@@ -312,28 +323,156 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	const provider2 = vscode.languages.registerCompletionItemProvider({ scheme: 'file', language: 'kuin' }, {
+	const providerAt = vscode.languages.registerCompletionItemProvider({ scheme: 'file', language: 'kuin' }, {
+
+		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
+
+			// get all text until the `position` and check if it reads `except@`
+			let linePrefix = document.lineAt(position).text.substr(0, position.character);
+			if (linePrefix.endsWith('except@')) {
+				return [
+					new vscode.CompletionItem('accessViolation', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('classCastFailed', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('ctrlCExit', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('dbgArgOutDomain', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('dbgArrayIdxOutOfRange', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('dbgAssertFailed', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('dbgInoperableState', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('dbgIntOverflow', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('deviceInitFailed', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('fileReadFailed', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('floatInvalidOperation', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('intDivideByZero', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('invalidCmp', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('noMem', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('stackOverflow', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('userMax', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('userMin', vscode.CompletionItemKind.Constant)
+				];
+			}
+			else if (linePrefix.endsWith('lib@')) {
+				return [
+					new vscode.CompletionItem('BmSearch', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('Bool', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('Char', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('Float', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('Int', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('Rnd', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('Str', vscode.CompletionItemKind.Class),
+					new vscode.CompletionItem('acos', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('acosh', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('asin', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('asinh', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('atan', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('atanh', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('ceil', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('cerp', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('chase', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('cmdLine', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('cmp', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('cmpEx', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('cos', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('cosh', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('countUp', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('dateToInt', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('decrypt', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('dist', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('e', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('encrypt', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('exitCode', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('exp', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('floor', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('hash', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('hermite', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('intMax', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('intMin', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('intToDate', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('intToLocalDate', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('invRot', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('lerp', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('levenshtein', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('ln', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('localDateToInt', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('log', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('makeBmSearch', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('makeRnd', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('max', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('maxFloat', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('min', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('minFloat', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('now', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('pi', vscode.CompletionItemKind.Constant),
+					new vscode.CompletionItem('qerp', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('rnd', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('rndBit64', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('rndFloat', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('rndUuid', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('rot', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('round', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('same', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('sin', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('sinh', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('sleep', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('sqrt', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('sysTime', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('tan', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('tanh', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('toDegree', vscode.CompletionItemKind.Function),
+					new vscode.CompletionItem('toRad', vscode.CompletionItemKind.Function),
+				];
+			}
+			else { return undefined; }
+		}
+	},
+		'@' // triggered whenever a '.' is being typed
+	);
+
+	const providerDot = vscode.languages.registerCompletionItemProvider({ scheme: 'file', language: 'kuin' }, {
 
 		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
 
 			// get all text until the `position` and check if it reads `kuin@Class.`
 			// and iff so then complete if `cmp`, `ctor`, and `toStr`
 			let linePrefix = document.lineAt(position).text.substr(0, position.character);
-			if (!linePrefix.endsWith('kuin@Class.')) {
-				return undefined;
+			if (linePrefix.endsWith('kuin@Class.')) {
+				return [
+					new vscode.CompletionItem('cmp', vscode.CompletionItemKind.Method),
+					new vscode.CompletionItem('ctor', vscode.CompletionItemKind.Method),
+					new vscode.CompletionItem('toStr', vscode.CompletionItemKind.Method),
+				];
 			}
-
-			return [
-				new vscode.CompletionItem('cmp', vscode.CompletionItemKind.Method),
-				new vscode.CompletionItem('ctor', vscode.CompletionItemKind.Method),
-				new vscode.CompletionItem('toStr', vscode.CompletionItemKind.Method),
-			];
+			else if (linePrefix.endsWith('lib@BmSearch.')) {
+				return [new vscode.CompletionItem('find', vscode.CompletionItemKind.Method)];
+			}
+			else if (linePrefix.endsWith('lib@Bool.')) {
+				return [new vscode.CompletionItem('value', vscode.CompletionItemKind.Property)];
+			}
+			else if (linePrefix.endsWith('lib@Char.')) {
+				return [new vscode.CompletionItem('value', vscode.CompletionItemKind.Property)];
+			}
+			else if (linePrefix.endsWith('lib@Float.')) {
+				return [new vscode.CompletionItem('value', vscode.CompletionItemKind.Property)];
+			}
+			else if (linePrefix.endsWith('lib@Int.')) {
+				return [new vscode.CompletionItem('value', vscode.CompletionItemKind.Property)];
+			}
+			else if (linePrefix.endsWith('lib@Rnd.')) {
+				return [
+					new vscode.CompletionItem('rnd', vscode.CompletionItemKind.Method),
+					new vscode.CompletionItem('rndBit64', vscode.CompletionItemKind.Method),
+					new vscode.CompletionItem('rndFloat', vscode.CompletionItemKind.Method)
+				];
+			}
+			else if (linePrefix.endsWith('lib@Str.')) {
+				return [new vscode.CompletionItem('value', vscode.CompletionItemKind.Property)];
+			}
+			else { return undefined; }
 		}
 	},
 		'.' // triggered whenever a '.' is being typed
 	);
 
-	context.subscriptions.push(provider1, provider2);
+	context.subscriptions.push(provider1, providerAt, providerDot);
 }
 
 // this method is called when your extension is deactivated
