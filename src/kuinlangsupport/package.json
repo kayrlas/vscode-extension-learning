@@ -1,0 +1,34 @@
+{
+    "name": "kuinlangsupport",
+    "displayName": "KuinLangSupport",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.36.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "kuin",
+                "aliases": [
+                    "Kuin",
+                    "kuin"
+                ],
+                "extensions": [
+                    ".kn"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "kuin",
+                "scopeName": "",
+                "path": "./syntaxes/kuin.tmLanguage.json"
+            }
+        ]
+    }
+}
