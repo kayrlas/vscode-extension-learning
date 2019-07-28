@@ -51,6 +51,15 @@ export function activate(context: vscode.ExtensionContext) {
 			// snippetCompletion.insertText = new vscode.SnippetString('Good ${1|morning,afternoon,evening|}. It is ${1}, right?');
 			// snippetCompletion.documentation = new vscode.MarkdownString("Inserts a snippet that lets you select the _appropriate_ part of the day for your greeting.");
 
+			// Name : ItemKind
+			// (CompletionItemKind,commitCharacters,         detail,                      documentation,     insertText)
+			// = (          Module,               @,   Kuin library,       'Press `@` to get `except@`',)
+			// = (           Class,               .,     Kuin class,   'Press `.` to get `kuin@Class.`',)
+			// = (         Keyword,                ,   Kuin keyword,                             [Name], [Name]+[Space])
+
+			// let a: [] = [new vscode.CompletionItem('except', vscode.CompletionItemKind.Module);,
+			//              new vscode.CompletionItem('lib', vscode.CompletionItemKind.Module);]
+
 			// Kuin modules
 			const constantCompletion01 = new vscode.CompletionItem('except', vscode.CompletionItemKind.Module);
 			constantCompletion01.commitCharacters = ['@'];
