@@ -57,6 +57,76 @@ export function activate(context: vscode.ExtensionContext) {
 			// = (           Class,               .,     Kuin class,   'Press `.` to get `kuin@Class.`',)
 			// = (         Keyword,                ,   Kuin keyword,                             [Name], [Name]+[Space])
 
+			const moduleList: vscode.CompletionItem[] = [
+				new vscode.CompletionItem('excpt', vscode.CompletionItemKind.Module),
+				new vscode.CompletionItem('lib', vscode.CompletionItemKind.Module)
+			]
+			const classList: vscode.CompletionItem[] = [
+				new vscode.CompletionItem('kuin@Class', vscode.CompletionItemKind.Class)
+			]
+			const keywordList: vscode.CompletionItem[] = [
+				new vscode.CompletionItem('alias', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('assert', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('bit16', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('bit32', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('bit64', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('bit8', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('block', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('bool', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('break', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('case', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('catch', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('char', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('class', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('const', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('dbg', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('default', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('dict', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('do', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('elif', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('else', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('end', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('enum', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('false', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('finally', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('float', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('for', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('func', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('if', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('include', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('inf', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('int', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('list', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('me', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('null', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('queue', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('ret', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('skip', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('stack', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('super', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('switch', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('throw', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('to', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('true', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('try', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('var', vscode.CompletionItemKind.Keyword),
+				new vscode.CompletionItem('while', vscode.CompletionItemKind.Keyword)
+			]
+
+			moduleList.forEach(function (item: vscode.CompletionItem) {
+				item.commitCharacters = ['@']
+				item.detail = 'Kuin library'
+				item.documentation = new vscode.MarkdownString('Press `@` to get `' + item.label + '@`');
+			})
+			classList.forEach(function (item: vscode.CompletionItem) {
+				item.commitCharacters = ['.']
+				item.detail = 'Kuin class'
+				item.documentation = new vscode.MarkdownString('Press `.` to get `' + item.label + '.`');
+			})
+			keywordList.forEach(function (item: vscode.CompletionItem) {
+				item.detail = 'Kuin keyword'
+				item.insertText = item.label + ' '
+			})
 
 			const returnList: vscode.CompletionItem[] = [
 				// Kuin modules
@@ -138,7 +208,8 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			// return all completion items
-			return returnList
+			// return returnList
+			return moduleList.concat(classList.concat(keywordList))
 		}
 	});
 
