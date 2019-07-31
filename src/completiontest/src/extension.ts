@@ -57,8 +57,6 @@ export function activate(context: vscode.ExtensionContext) {
 			// = (           Class,               .,     Kuin class,   'Press `.` to get `kuin@Class.`',)
 			// = (         Keyword,                ,   Kuin keyword,                             [Name], [Name]+[Space])
 
-			// let a: [] = [new vscode.CompletionItem('excpt', vscode.CompletionItemKind.Module);,
-			//              new vscode.CompletionItem('lib', vscode.CompletionItemKind.Module);]
 
 			const returnList: vscode.CompletionItem[] = [
 				// Kuin modules
@@ -122,7 +120,7 @@ export function activate(context: vscode.ExtensionContext) {
 					case vscode.CompletionItemKind.Module:
 						returnList[i].commitCharacters = ['@']
 						returnList[i].detail = 'Kuin library'
-						returnList[i].documentation = new vscode.MarkdownString('Press `@` to get ...');
+						returnList[i].documentation = new vscode.MarkdownString('Press `@` to get `' + returnList[i].label + '@`');
 						break;
 					case vscode.CompletionItemKind.Class:
 						returnList[i].commitCharacters = ['.']
